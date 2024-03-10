@@ -26,8 +26,9 @@ function tetris() {
     imprimirPantalla($game);
 
     $estadoInicial = 0;
+    $input = '';
 
-    while (true) { // funciona con true, pero continúa un error en caso de querer salir, o forzar el cierre. no es la condición correcta
+    while ($input != 'x') { // funciona con true, pero continúa un error en caso de querer salir, o forzar el cierre. no es la condición correcta
         $input = trim(fgets(STDIN));
 
         switch ($input) {
@@ -49,15 +50,12 @@ function tetris() {
         }
 
         $result = moverPieza($game, $movimiento, $estadoInicial);
-
-        if ($result == null) { // forma de finarlizar el juego, está bien pero no al mismo tiempo *fix
-            echo "\nPartida terminada. ¡Gracias por jugar!\n";
-            break; // no está bien usarlo acá, fix
-        }
-
+        
         $game = $result["game"];
         $estadoInicial = $result["estadoInicial"];
     }
+
+    echo "\nPartida terminada. ¡Gracias por jugar!\n";
 }
 /**
  * @array $game
